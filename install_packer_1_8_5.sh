@@ -25,6 +25,6 @@ VERIFIED_PACKER_HASH=$(awk -e '/p.+linux_amd64.+/ {print $1}' packer_${PACKER_VE
 [ "${VERIFIED_PACKER_HASH}" == "${PACKER_BINARY_HASH}" ] && echo "The hash is GOOD!"
 
 unzip ${PACKER_LINUX_BINARY} &&
-sudo mv packer /usr/bin
+mv packer /usr/bin
 
 packer --version
