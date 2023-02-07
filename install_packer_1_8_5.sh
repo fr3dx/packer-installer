@@ -1,9 +1,12 @@
 #!/bin/bash
 
 <<comment
- "This script downloads packer version 1.8.5, it checks the GPG signature
-  of packer_1.8.5_SHA256SUMS file, select the desired packer version 1.8.5 from it
-  and compares the selected hash with packer_1.8.5_linux_amd64.zip file"
+ "This script downloads packer version 1.8.5, 
+  it checks the GPG signature of packer_1.8.5_SHA256SUMS file, 
+  selects the desired packer version 1.8.5 from it and
+  compares the selected hash with packer_1.8.5_linux_amd64.zip file
+  !!! The Hashicorp public key expires: 2026-04-18 !!!
+ "
 comment
 
 PACKER_DOWNLOAD_URL="https://releases.hashicorp.com/packer"
@@ -24,7 +27,7 @@ VERIFIED_PACKER_HASH=$(awk -e '/p.+linux_amd64.+/ {print $1}' packer_${PACKER_VE
 ([ "${VERIFIED_PACKER_HASH}" == "${PACKER_BINARY_HASH}" ] && echo "The hash is GOOD!") ||
 (echo "The hash is BAD!" && exit 1)
 
-#unzip ${PACKER_LINUX_BINARY} &&
-#mv packer /usr/bin
+unzip ${PACKER_LINUX_BINARY} &&
+mv packer /usr/bin
 
-#packer --version
+packer -v
